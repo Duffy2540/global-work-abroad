@@ -977,4 +977,248 @@ index.html<!DOCTYPE html>
   <!-- CONTACT -->
   <section class="section" id="contact">
 
-    <div class="section-title">
+    <div class="section-title"><h2>Contact Us</h2>
+<p>Have a question about a job or need help? Send us a message.</p>
+</div>
+
+<div class="contact-form">
+
+  <form onsubmit="submitContact(event)">
+
+    <div class="form-group">
+      <label for="contactName">Full Name</label>
+      <input type="text" id="contactName" placeholder="Enter your full name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="contactEmail">Email Address</label>
+      <input type="email" id="contactEmail" placeholder="Enter your email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="contactMessage">Message</label>
+      <textarea id="contactMessage" placeholder="Write your message..." required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+      Send Message
+    </button>
+
+  </form>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+  <h2>Global Work Abroad</h2>
+
+  <p>Discover international employment opportunities.</p>
+
+  <p>Always verify employers and recruitment information before applying.</p>
+
+  <div class="footer-bottom">
+    © 2026 Global Work Abroad. All rights reserved.
+  </div>
+
+</footer>
+
+
+<!-- APPLICATION MODAL -->
+<div class="modal" id="applicationModal">
+
+  <div class="modal-content">
+
+    <span class="close" onclick="closeApplication()">&times;</span>
+
+    <h2>Apply for a Job</h2>
+
+    <p class="modal-subtitle" id="selectedJob">
+      Job application
+    </p>
+
+    <form onsubmit="submitApplication(event)">
+
+      <div class="form-group">
+        <label for="applicantName">Full Name</label>
+        <input type="text" id="applicantName" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="applicantEmail">Email Address</label>
+        <input type="email" id="applicantEmail" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="applicantPhone">Phone Number</label>
+        <input type="tel" id="applicantPhone" placeholder="Enter your phone number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="applicantCountry">Country of Residence</label>
+        <input type="text" id="applicantCountry" placeholder="e.g. Kenya" required>
+      </div>
+
+      <div class="form-group">
+        <label for="applicantMessage">Additional Information</label>
+        <textarea id="applicantMessage" placeholder="Tell the employer about yourself..."></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        Submit Application
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  /* MOBILE MENU */
+  function toggleMenu() {
+    const nav = document.getElementById("navLinks");
+    nav.classList.toggle("show");
+  }
+
+
+  /* JOB SEARCH AND FILTER */
+  function filterJobs() {
+
+    const search =
+      document.getElementById("searchInput").value.toLowerCase();
+
+    const country =
+      document.getElementById("countryFilter").value;
+
+    const category =
+      document.getElementById("categoryFilter").value;
+
+    const jobs =
+      document.querySelectorAll(".job-card");
+
+    let visibleJobs = 0;
+
+    jobs.forEach(function(job) {
+
+      const title =
+        job.getAttribute("data-title").toLowerCase();
+
+      const jobCountry =
+        job.getAttribute("data-country");
+
+      const jobCategory =
+        job.getAttribute("data-category");
+
+      const matchesSearch =
+        title.includes(search);
+
+      const matchesCountry =
+        country === "" || jobCountry === country;
+
+      const matchesCategory =
+        category === "" || jobCategory === category;
+
+      if (
+        matchesSearch &&
+        matchesCountry &&
+        matchesCategory
+      ) {
+
+        job.style.display = "block";
+        visibleJobs++;
+
+      } else {
+
+        job.style.display = "none";
+
+      }
+
+    });
+
+    const noJobs =
+      document.getElementById("noJobs");
+
+    noJobs.style.display =
+      visibleJobs === 0 ? "block" : "none";
+  }
+
+
+  /* OPEN APPLICATION */
+  function openApplication(jobName) {
+
+    document.getElementById("selectedJob").textContent =
+      "Applying for: " + jobName;
+
+    document.getElementById("applicationModal").style.display =
+      "flex";
+
+    document.body.style.overflow = "hidden";
+  }
+
+
+  /* CLOSE APPLICATION */
+  function closeApplication() {
+
+    document.getElementById("applicationModal").style.display =
+      "none";
+
+    document.body.style.overflow = "auto";
+  }
+
+
+  /* CLOSE MODAL WHEN CLICKING OUTSIDE */
+  window.onclick = function(event) {
+
+    const modal =
+      document.getElementById("applicationModal");
+
+    if (event.target === modal) {
+      closeApplication();
+    }
+
+  };
+
+
+  /* APPLICATION FORM */
+  function submitApplication(event) {
+
+    event.preventDefault();
+
+    alert(
+      "Thank you! Your application has been received. " +
+      "We will provide further instructions if the opportunity is verified."
+    );
+
+    event.target.reset();
+
+    closeApplication();
+  }
+
+
+  /* CONTACT FORM */
+  function submitContact(event) {
+
+    event.preventDefault();
+
+    alert(
+      "Thank you for contacting Global Work Abroad. " +
+      "Your message has been received."
+    );
+
+    event.target.reset();
+  }
+
+</script>
+
+</body>
+</html>
+
+      
+
+      
