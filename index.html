@@ -1227,7 +1227,34 @@ function submitContact(event) {
 
   form.reset();
 }
-  }
+function openApplication(jobName) {
+
+  const message =
+    "Hello Global Work Abroad.\n\n" +
+    "I would like to apply for:\n" +
+    jobName + "\n\n" +
+    "Please send me the application requirements.";
+
+  window.open(
+    "https://wa.me/254742911195?text=" + encodeURIComponent(message),
+    "_blank"
+  );
+}
+
+form.reset();
+}
+
+function openApplication(jobName) {
+  const message =
+    "Hello Global Work Abroad.\n\n" +
+    "I would like to apply for:\n" +
+    jobName + "\n\n" +
+    "Please send me the application requirements.";
+
+  window.location.href =
+    "https://wa.me/254742911195?text=" +
+    encodeURIComponent(message);
+}
 
 </script>
 
