@@ -1259,6 +1259,67 @@ function openApplication(jobName) {
 </script>
 
 </body>
+<!-- APPLICATION FORM -->
+<div class="modal" id="applicationModal">
+  <div class="modal-content">
+
+    <span class="close" onclick="closeApplicationForm()">&times;</span>
+
+    <h2>Apply for Job</h2>
+    <p class="modal-subtitle" id="selectedJob"></p>
+
+    <form id="applicationForm">
+
+      <input type="hidden" id="jobTitle" name="jobTitle">
+
+      <div class="form-group">
+        <label for="applicantName">Full Name</label>
+        <input
+          type="text"
+          id="applicantName"
+          name="name"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="applicantEmail">Email Address</label>
+        <input
+          type="email"
+          id="applicantEmail"
+          name="email"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="applicantPhone">Phone Number</label>
+        <input
+          type="tel"
+          id="applicantPhone"
+          name="phone"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="applicantMessage">Tell us about yourself</label>
+        <textarea
+          id="applicantMessage"
+          name="message"
+          required
+        ></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        Submit Application
+      </button>
+
+    </form>
+
+  </div>
+</div>
+  
 </html>
 
       
