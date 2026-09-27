@@ -714,7 +714,11 @@ index.html<!DOCTYPE html>
 
         <div class="job-bottom">
           <span class="salary">Salary: See employer</span>
-<button class="search-btn" onclick="searchJobs()">Search Jobs</button>
+<button
+  class="apply-btn"
+  onclick="openApplication('Farm Worker - USA')">
+  Apply
+</button>
 
         </div>
 
@@ -1257,7 +1261,11 @@ function openApplication(jobName) {
 
 </script>
 
-</body>
+<script>
+function openApplication(jobTitle) {
+  alert("You selected: " + jobTitle);
+}
+</script></body>
 </html>
 
       
