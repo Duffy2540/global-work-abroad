@@ -6,7 +6,8 @@
 
   <title>Global Work Abroad | Find Jobs Worldwide</title>
 
-  <meta name="description" content="Global Work Abroad helps job seekers discover international employment opportunities.">
+  <meta name="description"
+        content="Global Work Abroad helps job seekers discover international employment opportunities.">
 
   <style>
     * {
@@ -15,11 +16,15 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      color: #222;
-      background: #f5f7fa;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+      line-height: 1.5;
     }
 
     a {
@@ -27,761 +32,1457 @@
       color: inherit;
     }
 
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
     button {
       cursor: pointer;
     }
 
-    nav {
-      background: #0b3d91;
-      color: white;
-      padding: 15px 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: white;
-      font-weight: bold;
-    }
-
-    .menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 25px;
-    }
-
-    .hero {
-      background: linear-gradient(135deg, #0b3d91, #1976d2);
-      color: white;
-      padding: 80px 5%;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 42px;
-      margin-bottom: 15px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      margin-bottom: 25px;
-    }
-
-    .search-box {
-      max-width: 600px;
-      margin: auto;
-      display: flex;
-      gap: 10px;
-    }
-
-    .search-box input {
-      flex: 1;
-      padding: 14px;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-    }
-
-    .search-box button {
-      padding: 14px 20px;
-      border: none;
-      border-radius: 6px;
-      background: #ff9800;
-      color: white;
-      font-weight: bold;
-    }
-
-    .section {
-      padding: 60px 5%;
+    .container {
+      width: 92%;
       max-width: 1200px;
       margin: auto;
     }
 
+    /* HEADER */
+
+    header {
+      background: #0b3d91;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    }
+
+    .header-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: #ffd43b;
+    }
+
+    nav {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    nav a {
+      padding: 10px 12px;
+      border-radius: 7px;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.13);
+    }
+
+    .menu-btn {
+      display: none;
+      border: 0;
+      background: #174fa8;
+      color: white;
+      padding: 9px 12px;
+      border-radius: 7px;
+    }
+
+    /* HERO */
+
+    .hero {
+      background:
+        linear-gradient(135deg, #0b3d91, #1261c9);
+      color: white;
+      padding: 75px 0 90px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      text-align: center;
+      margin: auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.14);
+      padding: 8px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(35px, 7vw, 62px);
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 span {
+      color: #ffd43b;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: auto auto 28px;
+      color: #e6efff;
+      font-size: 17px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      border: 0;
+      padding: 13px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: #ffd43b;
+      color: #172033;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #0b3d91;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    /* SEARCH */
+
+    .search-area {
+      margin-top: -35px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .search-box {
+      background: white;
+      border-radius: 13px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(25,45,80,0.15);
+      border: 1px solid #e1e7f0;
+    }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr auto;
+      gap: 10px;
+    }
+
+    .search-row input,
+    .search-row select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccd5e2;
+      border-radius: 7px;
+      outline: none;
+      background: white;
+      color: #172033;
+    }
+
+    .search-row input:focus,
+    .search-row select:focus {
+      border-color: #0b3d91;
+    }
+
+    .search-btn {
+      border: 0;
+      padding: 13px 20px;
+      border-radius: 7px;
+      background: #0b3d91;
+      color: white;
+      font-weight: 700;
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 60px 0;
+    }
+
     .section-title {
       text-align: center;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
 
     .section-title h2 {
-      font-size: 32px;
-      color: #0b3d91;
-      margin-bottom: 10px;
+      font-size: 30px;
+      margin-bottom: 7px;
     }
 
-    .jobs-grid {
+    .section-title p {
+      color: #68758a;
+    }
+
+    /* STATS */
+
+    .stats {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .stat-card {
+      background: white;
+      border: 1px solid #e1e7f0;
+      border-radius: 11px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .stat-number {
+      display: block;
+      color: #0b3d91;
+      font-size: 31px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      color: #6c7789;
+      font-size: 14px;
+    }
+
+    /* JOBS */
+
+    .jobs-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 22px;
+    }
+
+    .jobs-header h2 {
+      font-size: 28px;
+    }
+
+    .job-count {
+      color: #66758b;
+      font-size: 14px;
+    }
+
+    .jobs-list {
+      display: grid;
+      gap: 15px;
     }
 
     .job-card {
       background: white;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+      border: 1px solid #e0e6ef;
+      border-radius: 12px;
+      padding: 21px;
+      transition: 0.2s;
     }
 
-    .job-card h3 {
+    .job-card:hover {
+      box-shadow: 0 8px 25px rgba(25,45,80,0.10);
+      transform: translateY(-2px);
+    }
+
+    .job-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .job-title {
+      font-size: 20px;
+      color: #172033;
+      margin-bottom: 7px;
+    }
+
+    .company {
       color: #0b3d91;
-      margin-bottom: 10px;
+      font-weight: 700;
+      margin-bottom: 9px;
     }
 
-    .job-card p {
-      margin: 6px 0;
+    .job-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      color: #68758a;
+      font-size: 13px;
+    }
+
+    .job-tag {
+      background: #edf3fc;
+      color: #0b3d91;
+      padding: 5px 8px;
+      border-radius: 5px;
+    }
+
+    .job-description {
+      margin: 15px 0;
+      color: #647188;
+      font-size: 14px;
+    }
+
+    .job-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      border-top: 1px solid #edf0f5;
+      padding-top: 15px;
+    }
+
+    .salary {
+      font-weight: 700;
+      color: #188038;
     }
 
     .apply-btn {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      border: none;
-      border-radius: 6px;
+      border: 0;
       background: #0b3d91;
       color: white;
-      font-weight: bold;
+      padding: 10px 17px;
+      border-radius: 7px;
+      font-weight: 700;
     }
 
     .apply-btn:hover {
-      background: #062b66;
+      background: #082e70;
     }
 
-    .no-jobs {
-      display: none;
-      text-align: center;
-      padding: 30px;
-      color: #777;
+    /* COUNTRIES */
+
+    .country-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
     }
 
-    .notice {
-      background: #fff3cd;
-      padding: 20px;
-      border-left: 5px solid #ff9800;
-      border-radius: 5px;
-    }
-
-    .contact-form {
-      max-width: 600px;
-      margin: auto;
+    .country-card {
       background: white;
+      border: 1px solid #e1e7f0;
+      border-radius: 11px;
+      padding: 23px;
+      text-align: center;
+    }
+
+    .country-flag {
+      font-size: 34px;
+      margin-bottom: 9px;
+    }
+
+    .country-card h3 {
+      margin-bottom: 4px;
+    }
+
+    .country-card p {
+      color: #748095;
+      font-size: 13px;
+    }
+
+    /* HOW IT WORKS */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      background: white;
+      border: 1px solid #e1e7f0;
+      border-radius: 11px;
       padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
     }
 
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-
-    .contact-form textarea {
-      height: 120px;
-      resize: vertical;
-    }
-
-    .whatsapp-btn {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 6px;
-      background: #25d366;
+    .step-number {
+      width: 40px;
+      height: 40px;
+      background: #0b3d91;
       color: white;
-      font-weight: bold;
-      font-size: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      margin-bottom: 13px;
     }
+
+    .step h3 {
+      margin-bottom: 7px;
+    }
+
+    .step p {
+      color: #6d798d;
+      font-size: 14px;
+    }
+
+    /* NO RESULTS */
+
+    .no-results {
+      display: none;
+      background: white;
+      border: 1px solid #e1e7f0;
+      border-radius: 10px;
+      padding: 30px;
+      text-align: center;
+      color: #68758a;
+    }
+
+    /* CONTACT */
+
+    .contact-box {
+      background: #0b3d91;
+      color: white;
+      border-radius: 15px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .contact-box h2 {
+      margin-bottom: 10px;
+    }
+
+    .contact-box p {
+      color: #dce9ff;
+      margin-bottom: 20px;
+    }
+
+    /* FOOTER */
 
     footer {
-      background: #0b3d91;
+      background: #101827;
       color: white;
+      padding: 40px 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 30px;
+    }
+
+    footer h3 {
+      margin-bottom: 12px;
+    }
+
+    footer p,
+    footer li {
+      color: #9da9bb;
+      font-size: 14px;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer li {
+      margin-bottom: 7px;
+    }
+
+    .copyright {
+      border-top: 1px solid #263143;
+      margin-top: 28px;
+      padding-top: 18px;
       text-align: center;
-      padding: 25px;
-      margin-top: 30px;
+      color: #78869b;
+      font-size: 13px;
     }
 
-    .modal {
-      display: none;
+    /* WHATSAPP */
+
+    .whatsapp {
       position: fixed;
-      z-index: 2000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      padding: 20px;
-      overflow-y: auto;
-    }
-
-    .modal-content {
-      background: white;
-      max-width: 500px;
-      margin: 50px auto;
-      padding: 25px;
-      border-radius: 10px;
-      position: relative;
-    }
-
-    .close {
-      position: absolute;
-      right: 20px;
-      top: 10px;
-      font-size: 28px;
-      cursor: pointer;
-      color: #555;
-    }
-
-    .modal-content input,
-    .modal-content textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .modal-content textarea {
-      height: 100px;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 13px;
-      background: #0b3d91;
+      right: 18px;
+      bottom: 18px;
+      width: 56px;
+      height: 56px;
+      background: #25d366;
       color: white;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      font-weight: 800;
+      z-index: 999;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.25);
     }
 
-    @media (max-width: 700px) {
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background: #0b3d91;
-        flex-direction: column;
-        padding: 20px;
+    /* MOBILE */
+
+    @media (max-width: 850px) {
+
+      .search-row {
+        grid-template-columns: 1fr 1fr;
       }
 
-      .nav-links.active {
-        display: flex;
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .country-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
       }
 
       .menu-btn {
         display: block;
       }
 
-      .hero h1 {
-        font-size: 32px;
+      nav {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: #0b3d91;
+        padding: 10px;
+        flex-direction: column;
+        align-items: stretch;
       }
 
-      .search-box {
+      nav.open {
+        display: flex;
+      }
+
+      nav a {
+        display: block;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .container {
+        width: 94%;
+      }
+
+      .hero {
+        padding: 55px 0 75px;
+      }
+
+      section {
+        padding: 45px 0;
+      }
+
+      .search-row {
+        grid-template-columns: 1fr;
+      }
+
+      .stats,
+      .country-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .job-top {
         flex-direction: column;
+      }
+
+      .job-bottom {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .apply-btn {
+        width: 100%;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-box {
+        padding: 28px 20px;
       }
     }
   </style>
 </head>
-  <body>
 
-  <nav>
-    <div class="logo">Global Work Abroad</div>
+<body>
 
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <header>
+    <div class="container header-inner">
 
-    <div class="nav-links" id="navLinks">
-      <a href="#home" onclick="closeMenu()">Home</a>
-      <a href="#jobs" onclick="closeMenu()">Jobs</a>
-      <a href="#how-it-works" onclick="closeMenu()">How It Works</a>
-      <a href="#about" onclick="closeMenu()">About</a>
-      <a href="#contact" onclick="closeMenu()">Contact</a>
-    </div>
-  </nav>
+      <a href="#home" class="logo">
+        Global <span>Work Abroad</span>
+      </a>
 
-  <section class="hero" id="home">
-    <h1>Find Jobs Around the World</h1>
-
-    <p>
-      Discover international job opportunities and take the next step in your career.
-    </p>
-
-    <div class="search-box">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search for a job..."
-        onkeyup="filterJobs()"
-      >
-
-      <button onclick="filterJobs()">Search</button>
-    </div>
-  </section>
-
-  <section class="section" id="jobs">
-
-    <div class="section-title">
-      <h2>Available Jobs</h2>
-      <p>Explore our current international opportunities.</p>
-    </div>
-
-    <div class="jobs-grid" id="jobsGrid">
-
-      <div class="job-card">
-        <h3>Farm Worker</h3>
-        <p><strong>Country:</strong> USA</p>
-        <p><strong>Category:</strong> Farm</p>
-        <p>Work on farms and assist with daily agricultural activities.</p>
-
-        <button
-          class="apply-btn"
-          onclick="showApplicationForm('Farm Worker')"
-        >
-          Apply
-        </button>
-      </div>
-
-      <div class="job-card">
-        <h3>Care Assistant</h3>
-        <p><strong>Country:</strong> UK</p>
-        <p><strong>Category:</strong> Care</p>
-        <p>Assist with daily care and support responsibilities.</p>
-
-        <button
-          class="apply-btn"
-          onclick="showApplicationForm('Care Assistant')"
-        >
-          Apply
-        </button>
-      </div>
-
-      <div class="job-card">
-        <h3>Warehouse Worker</h3>
-        <p><strong>Country:</strong> Canada</p>
-        <p><strong>Category:</strong> Warehouse</p>
-        <p>Assist with warehouse operations, packing and organizing goods.</p>
-
-        <button
-          class="apply-btn"
-          onclick="showApplicationForm('Warehouse Worker')"
-        >
-          Apply
-        </button>
-      </div>
-
-      <div class="job-card">
-        <h3>Hotel Worker</h3>
-        <p><strong>Country:</strong> Australia</p>
-        <p><strong>Category:</strong> Hospitality</p>
-        <p>Work in hotels and assist with hospitality services.</p>
-
-        <button
-          class="apply-btn"
-          onclick="showApplicationForm('Hotel Worker')"
-        >
-          Apply
-        </button>
-      </div>
-
-      <div class="job-card">
-        <h3>Construction Worker</h3>
-        <p><strong>Country:</strong> Germany</p>
-        <p><strong>Category:</strong> Construction</p>
-        <p>Assist with construction and building projects.</p>
-
-        <button
-          class="apply-btn"
-          onclick="showApplicationForm('Construction Worker')"
-        >
-          Apply
-        </button>
-      </div>
-
-      <div class="job-card">
-        <h3>Farm Assistant</h3>
-        <p><strong>Country:</strong> Canada</p>
-        <p><strong>Category:</strong> Farm</p>
-        <p>Assist with farming, maintenance and general agricultural work.</p>
-
-        <button
-          class="apply-btn"
-          onclick="showApplicationForm('Farm Assistant')"
-        >
-          Apply
-        </button>
-      </div>
-
-    </div>
-
-    <div class="no-jobs" id="noJobs">
-      No jobs found. Try another search.
-    </div>
-
-  </section>
-    <section class="section" id="how-it-works">
-
-    <div class="section-title">
-      <h2>How It Works</h2>
-      <p>Finding an international job can be simple.</p>
-    </div>
-
-    <div class="jobs-grid">
-
-      <div class="job-card">
-        <h3>1. Find a Job</h3>
-        <p>Search through the available international job opportunities.</p>
-      </div>
-
-      <div class="job-card">
-        <h3>2. Apply</h3>
-        <p>Choose a job and submit your application through our application form.</p>
-      </div>
-
-      <div class="job-card">
-        <h3>3. Get Contacted</h3>
-        <p>Our team can contact you with information about the next steps.</p>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <section class="section">
-
-    <div class="notice">
-      <h3>Important Safety Notice</h3>
-
-      <p>
-        Always verify job offers and employers before sending money or
-        personal documents. Be careful of scams and fraudulent job offers.
-      </p>
-    </div>
-
-  </section>
-
-
-  <section class="section" id="about">
-
-    <div class="section-title">
-      <h2>About Global Work Abroad</h2>
-
-      <p>
-        Global Work Abroad helps job seekers discover employment
-        opportunities in different countries around the world.
-      </p>
-    </div>
-
-  </section>
-
-
-  <section class="section" id="contact">
-
-    <div class="section-title">
-      <h2>Contact Us</h2>
-
-      <p>
-        Have a question? Send us a message through WhatsApp.
-      </p>
-    </div>
-
-    <div class="contact-form">
-
-      <input
-        type="text"
-        id="contactName"
-        placeholder="Your Name"
-      >
-
-      <input
-        type="text"
-        id="contactPhone"
-        placeholder="Your Phone Number"
-      >
-
-      <textarea
-        id="contactMessage"
-        placeholder="Write your message..."
-      ></textarea>
-
-      <button
-        class="whatsapp-btn"
-        onclick="sendContactMessage()"
-      >
-        WhatsApp Us
+      <button class="menu-btn" onclick="toggleMenu()">
+        ☰
       </button>
 
-    </div>
-
-  </section>
-<div class="modal" id="applicationModal">
-
-    <div class="modal-content">
-
-      <span class="close" onclick="closeApplicationForm()">&times;</span>
-
-      <h2>Job Application</h2>
-
-      <p id="selectedJob"></p>
-
-      <form onsubmit="submitApplication(event)">
-
-        <input
-          type="text"
-          id="appName"
-          placeholder="Full Name"
-          required
-        >
-
-        <input
-          type="text"
-          id="appPhone"
-          placeholder="Phone Number"
-          required
-        >
-
-        <input
-          type="email"
-          id="appEmail"
-          placeholder="Email Address"
-          required
-        >
-
-        <textarea
-          id="appMessage"
-          placeholder="Tell us briefly about yourself..."
-          required
-        ></textarea>
-
-        <button
-          type="submit"
-          class="submit-btn"
-        >
-          Submit Application
-        </button>
-
-      </form>
+      <nav id="mainNav">
+        <a href="#home">Home</a>
+        <a href="#jobs">Jobs</a>
+        <a href="#countries">Countries</a>
+        <a href="#how">How It Works</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
     </div>
+  </header>
 
-  </div>
+  <main>
+
+    <section class="hero" id="home">
+      <div class="container">
+
+        <div class="hero-content">
+
+          <div class="hero-badge">
+            🌍 INTERNATIONAL JOB OPPORTUNITIES
+          </div>
+
+          <h1>
+            Find Your Next
+            <span>Job Abroad</span>
+          </h1>
+
+          <p>
+            Explore employment opportunities from different countries
+            and discover jobs that match your skills and experience.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#jobs" class="btn btn-primary">
+              Browse Jobs
+            </a>
+
+            <a href="#how" class="btn btn-secondary">
+              How It Works
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="search-area">
+      <div class="container">
+
+        <div class="search-box">
+
+          <div class="search-row">
+
+            <input
+              type="text"
+              id="jobSearch"
+              placeholder="Search job title or keyword..."
+            >
+
+            <select id="countryFilter">
+              <option value="">All Countries</option>
+              <option value="Canada">Canada</option>
+              <option value="Germany">Germany</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="Australia">Australia</option>
+              <option value="Poland">Poland</option>
+              <option value="United States">United States</option>
+            </select>
+
+            <select id="categoryFilter">
+              <option value="">All Categories</option>
+              <option value="Construction">Construction</option>
+              <option value="Hospitality">Hospitality</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="Driving">Driving</option>
+              <option value="Technology">Technology</option>
+              <option value="Agriculture">Agriculture</option>
+            </select>
+
+            <button class="search-btn" onclick="searchJobs()">
+              Search
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+
+        <div class="stats">
+
+          <div class="stat-card">
+            <span class="stat-number">150+</span>
+            <span class="stat-label">Job Opportunities</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-number">25+</span>
+            <span class="stat-label">Countries</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-number">40+</span>
+            <span class="stat-label">Job Categories</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label">Online Access</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <section id="jobs">
+      <div class="container">
+
+        <div class="jobs-header">
+          <div>
+            <h2>Latest Job Opportunities</h2>
+            <p class="job-count" id="jobCount">
+              Showing all available jobs
+            </p>
+          </div>
+        </div>
+
+        <div class="jobs-list" id="jobsList">
+
+          <!-- JOB 1 -->
+          <article
+            class="job-card"
+            data-country="Canada"
+            data-category="Construction"
+            data-title="Construction Worker"
+          >
+
+            <div class="job-top">
+
+              <div>
+                <h3 class="job-title">
+                  Construction Worker
+                </h3>
+
+                <div class="company">
+                  International Construction Company
+                </div>
+
+                <div class="job-meta">
+                  <span class="job-tag">🇨🇦 Canada</span>
+                  <span class="job-tag">Construction</span>
+                  <span>Full Time</span>
+                </div>
+              </div>
+
+            </div>
+
+            <p class="job-description">
+              Construction workers needed for building and
+              infrastructure projects. Previous experience may
+              be required depending on the position.
+            </p>
+
+            <div class="job-bottom">
+
+              <span class="salary">
+                Competitive Salary
+              </span>
+
+              <button
+                class="apply-btn"
+                onclick="applyForJob('Construction Worker', 'Canada')"
+              >
+                Apply Now
+              </button>
+
+            </div>
+
+          </article>
 
 
+          <!-- JOB 2 -->
+          <article
+            class="job-card"
+            data-country="Germany"
+            data-category="Hospitality"
+            data-title="Hotel Staff"
+          >
+
+            <div class="job-top">
+
+              <div>
+                <h3 class="job-title">
+                  Hotel Staff
+                </h3>
+
+                <div class="company">
+                  International Hotel Group
+                </div>
+
+                <div class="job-meta">
+                  <span class="job-tag">🇩🇪 Germany</span>
+                  <span class="job-tag">Hospitality</span>
+                  <span>Full Time</span>
+                </div>
+              </div>
+
+            </div>
+
+            <p class="job-description">
+              Hospitality positions including housekeeping,
+              kitchen support and guest services.
+            </p>
+
+            <div class="job-bottom">
+
+              <span class="salary">
+                Competitive Salary
+              </span>
+
+              <button
+                class="apply-btn"
+                onclick="applyForJob('Hotel Staff', 'Germany')"
+              >
+                Apply Now
+              </button>
+
+            </div>
+
+          </article>
+
+
+          <!-- JOB 3 -->
+          <article
+            class="job-card"
+            data-country="United Kingdom"
+            data-category="Healthcare"
+            data-title="Care Assistant"
+          >
+
+            <div class="job-top">
+
+              <div>
+                <h3 class="job-title">
+                  Care Assistant
+                </h3>
+
+                <div class="company">
+                  UK Care Services
+                </div>
+
+                <div class="job-meta">
+                  <span class="job-tag">🇬🇧 United Kingdom</span>
+                  <span class="job-tag">Healthcare</span>
+                  <span>Full Time</span>
+                </div>
+              </div>
+
+            </div>
+
+            <p class="job-description">
+              Care assistant opportunities supporting people
+              with daily activities and general care needs.
+            </p>
+
+            <div class="job-bottom">
+
+              <span class="salary">
+                Competitive Salary
+              </span>
+
+              <button
+                class="apply-btn"
+                onclick="applyForJob('Care Assistant', 'United Kingdom')"
+              >
+                Apply Now
+              </button>
+
+            </div>
+
+          </article>
+
+
+          <!-- JOB 4 -->
+          <article
+            class="job-card"
+            data-country="Australia"
+            data-category="Agriculture"
+            data-title="Farm Worker"
+          >
+
+            <div class="job-top">
+
+              <div>
+                <h3 class="job-title">
+                  Farm Worker
+                </h3>
+
+                <div class="company">
+                  Australian Agricultural Company
+                </div>
+
+                <div class="job-meta">
+                  <span class="job-tag">🇦🇺 Australia</span>
+                  <span class="job-tag">Agriculture</span>
+                  <span>Seasonal</span>
+                </div>
+              </div>
+
+            </div>
+
+            <p class="job-description">
+              Agricultural workers for seasonal farming,
+              harvesting and general farm operations.
+            </p>
+
+            <div class="job-bottom">
+
+              <span class="salary">
+                Competitive Salary
+              </span>
+
+              <button
+                class="apply-btn"
+                onclick="applyForJob('Farm Worker', 'Australia')"
+              >
+                Apply Now
+              </button>
+
+            </div>
+
+          </article>
+
+
+          <!-- JOB 5 -->
+          <article
+            class="job-card"
+            data-country="Poland"
+            data-category="Driving"
+            data-title="Delivery Driver"
+          >
+
+            <div class="job-top">
+
+              <div>
+                <h3 class="job-title">
+                  Delivery Driver
+                </h3>
+
+                <div class="company">
+                  European Logistics Company
+                </div>
+
+                <div class="job-meta">
+                  <span class="job-tag">🇵🇱 Poland</span>
+                  <span class="job-tag">Driving</span>
+                  <span>Full Time</span>
+                </div>
+              </div>
+
+            </div>
+
+            <p class="job-description">
+              Delivery driving opportunities involving
+              transportation and distribution of goods.
+            </p>
+
+            <div class="job-bottom">
+
+              <span class="salary">
+                Competitive Salary
+              </span>
+
+              <button
+                class="apply-btn"
+                onclick="applyForJob('Delivery Driver', 'Poland')"
+              >
+                Apply Now
+              </button>
+
+            </div>
+
+          </article>
+
+
+          <!-- JOB 6 -->
+          <article
+            class="job-card"
+            data-country="United States"
+            data-category="Technology"
+            data-title="Junior Web Developer"
+          >
+
+            <div class="job-top">
+
+              <div>
+                <h3 class="job-title">
+                  Junior Web Developer
+                </h3>
+
+                <div class="company">
+                  Global Technology Company
+                </div>
+
+                <div class="job-meta">
+                  <span class="job-tag">🇺🇸 United States</span>
+                  <span class="job-tag">Technology</span>
+                  <span>Full Time</span>
+                </div>
+              </div>
+
+            </div>
+
+            <p class="job-description">
+              Entry-level web development opportunity for
+              candidates with HTML, CSS and JavaScript skills.
+            </p>
+
+            <div class="job-bottom">
+
+              <span class="salary">
+                Competitive Salary
+              </span>
+
+              <button
+                class="apply-btn"
+                onclick="applyForJob('Junior Web Developer', 'United States')"
+              >
+                Apply Now
+              </button>
+
+            </div>
+
+          </article>
+
+        </div>
+
+        <div class="no-results" id="noResults">
+          <h3>No jobs found</h3>
+          <p>
+            Try another job title, country or category.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <section id="countries">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Popular Destinations</h2>
+
+          <p>
+            Explore employment opportunities in different countries.
+          </p>
+        </div>
+
+        <div class="country-grid">
+
+          <div class="country-card">
+            <div class="country-flag">🇨🇦</div>
+            <h3>Canada</h3>
+            <p>Explore Canadian opportunities</p>
+          </div>
+
+          <div class="country-card">
+            <div class="country-flag">🇩🇪</div>
+            <h3>Germany</h3>
+            <p>Explore German opportunities</p>
+          </div>
+
+          <div class="country-card">
+            <div class="country-flag">🇬🇧</div>
+            <h3>United Kingdom</h3>
+            <p>Explore UK opportunities</p>
+          </div>
+
+          <div class="country-card">
+            <div class="country-flag">🇦🇺</div>
+            <h3>Australia</h3>
+            <p>Explore Australian opportunities</p>
+          </div>
+
+          <div class="country-card">
+            <div class="country-flag">🇵🇱</div>
+            <h3>Poland</h3>
+            <p>Explore Polish opportunities</p>
+          </div>
+
+          <div class="country-card">
+            <div class="country-flag">🇺🇸</div>
+            <h3>United States</h3>
+            <p>Explore US opportunities</p>
+          </div>
+
+          <div class="country-card">
+            <div class="country-flag">🇳🇱</div>
+            <h3>Netherlands</h3>
+            <p>Explore Dutch opportunities</p>
+          </div>
+
+          <div class="country-card">
+            <div class="country-flag">🇮🇪</div>
+            <h3>Ireland</h3>
+            <p>Explore Irish opportunities</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <section id="how">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>How It Works</h2>
+
+          <p>
+            Finding an international opportunity can be simple.
+          </p>
+        </div>
+
+        <div class="steps">
+
+          <div class="step">
+
+            <div class="step-number">1</div>
+
+            <h3>Find a Job</h3>
+
+            <p>
+              Search available opportunities by job title,
+              country or category.
+            </p>
+
+          </div>
+
+
+          <div class="step">
+
+            <div class="step-number">2</div>
+
+            <h3>Review the Opportunity</h3>
+
+            <p>
+              Read the available job information and make sure
+              the position matches your qualifications.
+            </p>
+
+          </div>
+
+
+          <div class="step">
+
+            <div class="step-number">3</div>
+
+            <h3>Apply</h3>
+
+            <p>
+              Contact the appropriate application channel and
+              follow the employer's official application process.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <section id="contact">
+      <div class="container">
+
+        <div class="contact-box">
+
+          <h2>Need Help?</h2>
+
+          <p>
+            Contact Global Work Abroad for website enquiries
+            and general information.
+          </p>
+
+          <a
+            href="https://wa.me/254742911195"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-primary"
+          >
+            WhatsApp Us
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
   <footer>
-    <p>
-      &copy; 2026 Global Work Abroad. All rights reserved.
-    </p>
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+          <h3>Global Work Abroad</h3>
+          <p>
+            Find international job opportunities and explore work options
+            around the world.
+          </p>
+        </div>
+
+        <div>
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#jobs">Jobs</a></li>
+            <li><a href="#countries">Countries</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Job Categories</h3>
+          <ul>
+            <li>Construction</li>
+            <li>Hospitality</li>
+            <li>Healthcare</li>
+            <li>Agriculture</li>
+            <li>Driving</li>
+            <li>Technology</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="copyright">
+        © 2026 Global Work Abroad. All rights reserved.
+      </div>
+
+    </div>
   </footer>
+
+
+  <!-- WHATSAPP BUTTON -->
+  <a
+    class="whatsapp"
+    href="https://wa.me/254700000000"
+    target="_blank"
+    rel="noopener"
+    aria-label="WhatsApp Global Work Abroad"
+  >
+    ☎
+  </a>
 
 
   <script>
 
+    /* MOBILE MENU */
     function toggleMenu() {
-      document.getElementById("navLinks").classList.toggle("active");
+      const nav = document.getElementById("mainNav");
+
+      nav.classList.toggle("open");
     }
 
 
-    function closeMenu() {
-      document.getElementById("navLinks").classList.remove("active");
-    }
+    /* SEARCH JOBS */
+    function searchJobs() {
 
+      const keyword =
+        document.getElementById("jobSearch").value
+        .toLowerCase()
+        .trim();
 
-    function filterJobs() {
+      const country =
+        document.getElementById("countryFilter").value
+        .toLowerCase();
 
-      const search =
-        document.getElementById("searchInput").value.toLowerCase();
+      const category =
+        document.getElementById("categoryFilter").value
+        .toLowerCase();
 
       const jobs =
         document.querySelectorAll(".job-card");
 
+      const noResults =
+        document.getElementById("noResults");
+
+      const jobCount =
+        document.getElementById("jobCount");
+
       let found = 0;
+
 
       jobs.forEach(function(job) {
 
-        const text = job.textContent.toLowerCase();
+        const title =
+          (job.dataset.title || "")
+          .toLowerCase();
 
-        if (text.includes(search)) {
-          job.style.display = "block";
+        const jobCountry =
+          (job.dataset.country || "")
+          .toLowerCase();
+
+        const jobCategory =
+          (job.dataset.category || "")
+          .toLowerCase();
+
+        const text =
+          job.textContent.toLowerCase();
+
+
+        const keywordMatch =
+          !keyword ||
+          title.includes(keyword) ||
+          text.includes(keyword);
+
+
+        const countryMatch =
+          !country ||
+          jobCountry === country;
+
+
+        const categoryMatch =
+          !category ||
+          jobCategory === category;
+
+
+        if (
+          keywordMatch &&
+          countryMatch &&
+          categoryMatch
+        ) {
+
+          job.style.display = "";
+
           found++;
+
         } else {
+
           job.style.display = "none";
+
         }
 
       });
 
-      const noJobs =
-        document.getElementById("noJobs");
 
       if (found === 0) {
-        noJobs.style.display = "block";
+
+        noResults.style.display = "block";
+
+        if (jobCount) {
+          jobCount.textContent =
+            "No matching jobs found";
+        }
+
       } else {
-        noJobs.style.display = "none";
+
+        noResults.style.display = "none";
+
+        if (jobCount) {
+          jobCount.textContent =
+            "Showing " +
+            found +
+            " job" +
+            (found === 1 ? "" : "s");
+        }
+
       }
 
     }
 
 
-    function showApplicationForm(jobName) {
+    /* APPLY FOR JOB THROUGH WHATSAPP */
+    function applyForJob(jobTitle, country) {
 
-      document.getElementById("selectedJob").textContent =
-        "Applying for: " + jobName;
+      /*
+       IMPORTANT:
+       Replace 254700000000 with your own WhatsApp number.
+       Use country code format.
+       Example for Kenya:
+       2547XXXXXXXX
+       Do NOT include the first 0.
+      */
 
-      document.getElementById("applicationModal").style.display =
-        "block";
+      const phone = "254700000000";
 
-    }
-
-
-    function closeApplicationForm() {
-
-      document.getElementById("applicationModal").style.display =
-        "none";
-
-    }
-
-
-    window.onclick = function(event) {
-
-      const modal =
-        document.getElementById("applicationModal");
-
-      if (event.target === modal) {
-        modal.style.display = "none";
-      }
-
-    };
-
-
-    function submitApplication(event) {
-
-      event.preventDefault();
-
-      const name =
-        document.getElementById("appName").value;
-
-      const phone =
-        document.getElementById("appPhone").value;
-
-      const email =
-        document.getElementById("appEmail").value;
 
       const message =
-        document.getElementById("appMessage").value;
-
-      const job =
-        document.getElementById("selectedJob").textContent;
-
-
-      const whatsappNumber =
-        "YOUR_WHATSAPP_NUMBER";
-
-
-      if (whatsappNumber === "YOUR_WHATSAPP_NUMBER") {
-
-        alert(
-          "The application form is working, but the WhatsApp number still needs to be added."
+        encodeURIComponent(
+          "Hello Global Work Abroad, " +
+          "I am interested in applying for the " +
+          jobTitle +
+          " position in " +
+          country +
+          ". Please send me the application details."
         );
 
-        return;
 
-      }
-
-
-      const text =
-        "NEW JOB APPLICATION%0A%0A" +
-        job +
-        "%0A%0A" +
-        "Name: " + encodeURIComponent(name) +
-        "%0APhone: " + encodeURIComponent(phone) +
-        "%0AEmail: " + encodeURIComponent(email) +
-        "%0AMessage: " + encodeURIComponent(message);
-
-
-      const url =
+      window.open(
         "https://wa.me/" +
-        whatsappNumber +
+        phone +
         "?text=" +
-        text;
-
-
-      window.open(url, "_blank");
+        message,
+        "_blank"
+      );
 
     }
 
 
-    function sendContactMessage() {
+    /* PRESS ENTER TO SEARCH */
+    document
+      .getElementById("jobSearch")
+      .addEventListener("keydown", function(event) {
 
-      const name =
-        document.getElementById("contactName").value;
+        if (event.key === "Enter") {
 
-      const phone =
-        document.getElementById("contactPhone").value;
+          searchJobs();
 
-      const message =
-        document.getElementById("contactMessage").value;
+        }
 
-
-      if (!name || !phone || !message) {
-
-        alert("Please fill in all the fields.");
-
-        return;
-
-      }
+      });
 
 
-      const whatsappNumber =
-        "YOUR_WHATSAPP_NUMBER";
+    /* CLOSE MOBILE MENU AFTER CLICKING A LINK */
+    document
+      .querySelectorAll("#mainNav a")
+      .forEach(function(link) {
 
+        link.addEventListener("click", function() {
 
-      if (whatsappNumber === "YOUR_WHATSAPP_NUMBER") {
+          document
+            .getElementById("mainNav")
+            .classList
+            .remove("open");
 
-        alert(
-          "The contact form is working, but the WhatsApp number still needs to be added."
-        );
+        });
 
-        return;
-
-      }
-
-
-      const text =
-        "NEW CONTACT MESSAGE%0A%0A" +
-        "Name: " + encodeURIComponent(name) +
-        "%0APhone: " + encodeURIComponent(phone) +
-        "%0AMessage: " + encodeURIComponent(message);
-
-
-      const url =
-        "https://wa.me/" +
-        whatsappNumber +
-        "?text=" +
-        text;
-
-
-      window.open(url, "_blank");
-
-    }
+      });
 
   </script>
 
