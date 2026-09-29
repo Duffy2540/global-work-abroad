@@ -303,3 +303,487 @@
     }
   </style>
 </head>
+  <body>
+
+  <nav>
+    <div class="logo">Global Work Abroad</div>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#home" onclick="closeMenu()">Home</a>
+      <a href="#jobs" onclick="closeMenu()">Jobs</a>
+      <a href="#how-it-works" onclick="closeMenu()">How It Works</a>
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#contact" onclick="closeMenu()">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <h1>Find Jobs Around the World</h1>
+
+    <p>
+      Discover international job opportunities and take the next step in your career.
+    </p>
+
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search for a job..."
+        onkeyup="filterJobs()"
+      >
+
+      <button onclick="filterJobs()">Search</button>
+    </div>
+  </section>
+
+  <section class="section" id="jobs">
+
+    <div class="section-title">
+      <h2>Available Jobs</h2>
+      <p>Explore our current international opportunities.</p>
+    </div>
+
+    <div class="jobs-grid" id="jobsGrid">
+
+      <div class="job-card">
+        <h3>Farm Worker</h3>
+        <p><strong>Country:</strong> USA</p>
+        <p><strong>Category:</strong> Farm</p>
+        <p>Work on farms and assist with daily agricultural activities.</p>
+
+        <button
+          class="apply-btn"
+          onclick="showApplicationForm('Farm Worker')"
+        >
+          Apply
+        </button>
+      </div>
+
+      <div class="job-card">
+        <h3>Care Assistant</h3>
+        <p><strong>Country:</strong> UK</p>
+        <p><strong>Category:</strong> Care</p>
+        <p>Assist with daily care and support responsibilities.</p>
+
+        <button
+          class="apply-btn"
+          onclick="showApplicationForm('Care Assistant')"
+        >
+          Apply
+        </button>
+      </div>
+
+      <div class="job-card">
+        <h3>Warehouse Worker</h3>
+        <p><strong>Country:</strong> Canada</p>
+        <p><strong>Category:</strong> Warehouse</p>
+        <p>Assist with warehouse operations, packing and organizing goods.</p>
+
+        <button
+          class="apply-btn"
+          onclick="showApplicationForm('Warehouse Worker')"
+        >
+          Apply
+        </button>
+      </div>
+
+      <div class="job-card">
+        <h3>Hotel Worker</h3>
+        <p><strong>Country:</strong> Australia</p>
+        <p><strong>Category:</strong> Hospitality</p>
+        <p>Work in hotels and assist with hospitality services.</p>
+
+        <button
+          class="apply-btn"
+          onclick="showApplicationForm('Hotel Worker')"
+        >
+          Apply
+        </button>
+      </div>
+
+      <div class="job-card">
+        <h3>Construction Worker</h3>
+        <p><strong>Country:</strong> Germany</p>
+        <p><strong>Category:</strong> Construction</p>
+        <p>Assist with construction and building projects.</p>
+
+        <button
+          class="apply-btn"
+          onclick="showApplicationForm('Construction Worker')"
+        >
+          Apply
+        </button>
+      </div>
+
+      <div class="job-card">
+        <h3>Farm Assistant</h3>
+        <p><strong>Country:</strong> Canada</p>
+        <p><strong>Category:</strong> Farm</p>
+        <p>Assist with farming, maintenance and general agricultural work.</p>
+
+        <button
+          class="apply-btn"
+          onclick="showApplicationForm('Farm Assistant')"
+        >
+          Apply
+        </button>
+      </div>
+
+    </div>
+
+    <div class="no-jobs" id="noJobs">
+      No jobs found. Try another search.
+    </div>
+
+  </section>
+    <section class="section" id="how-it-works">
+
+    <div class="section-title">
+      <h2>How It Works</h2>
+      <p>Finding an international job can be simple.</p>
+    </div>
+
+    <div class="jobs-grid">
+
+      <div class="job-card">
+        <h3>1. Find a Job</h3>
+        <p>Search through the available international job opportunities.</p>
+      </div>
+
+      <div class="job-card">
+        <h3>2. Apply</h3>
+        <p>Choose a job and submit your application through our application form.</p>
+      </div>
+
+      <div class="job-card">
+        <h3>3. Get Contacted</h3>
+        <p>Our team can contact you with information about the next steps.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <div class="notice">
+      <h3>Important Safety Notice</h3>
+
+      <p>
+        Always verify job offers and employers before sending money or
+        personal documents. Be careful of scams and fraudulent job offers.
+      </p>
+    </div>
+
+  </section>
+
+
+  <section class="section" id="about">
+
+    <div class="section-title">
+      <h2>About Global Work Abroad</h2>
+
+      <p>
+        Global Work Abroad helps job seekers discover employment
+        opportunities in different countries around the world.
+      </p>
+    </div>
+
+  </section>
+
+
+  <section class="section" id="contact">
+
+    <div class="section-title">
+      <h2>Contact Us</h2>
+
+      <p>
+        Have a question? Send us a message through WhatsApp.
+      </p>
+    </div>
+
+    <div class="contact-form">
+
+      <input
+        type="text"
+        id="contactName"
+        placeholder="Your Name"
+      >
+
+      <input
+        type="text"
+        id="contactPhone"
+        placeholder="Your Phone Number"
+      >
+
+      <textarea
+        id="contactMessage"
+        placeholder="Write your message..."
+      ></textarea>
+
+      <button
+        class="whatsapp-btn"
+        onclick="sendContactMessage()"
+      >
+        WhatsApp Us
+      </button>
+
+    </div>
+
+  </section>
+<div class="modal" id="applicationModal">
+
+    <div class="modal-content">
+
+      <span class="close" onclick="closeApplicationForm()">&times;</span>
+
+      <h2>Job Application</h2>
+
+      <p id="selectedJob"></p>
+
+      <form onsubmit="submitApplication(event)">
+
+        <input
+          type="text"
+          id="appName"
+          placeholder="Full Name"
+          required
+        >
+
+        <input
+          type="text"
+          id="appPhone"
+          placeholder="Phone Number"
+          required
+        >
+
+        <input
+          type="email"
+          id="appEmail"
+          placeholder="Email Address"
+          required
+        >
+
+        <textarea
+          id="appMessage"
+          placeholder="Tell us briefly about yourself..."
+          required
+        ></textarea>
+
+        <button
+          type="submit"
+          class="submit-btn"
+        >
+          Submit Application
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <footer>
+    <p>
+      &copy; 2026 Global Work Abroad. All rights reserved.
+    </p>
+  </footer>
+
+
+  <script>
+
+    function toggleMenu() {
+      document.getElementById("navLinks").classList.toggle("active");
+    }
+
+
+    function closeMenu() {
+      document.getElementById("navLinks").classList.remove("active");
+    }
+
+
+    function filterJobs() {
+
+      const search =
+        document.getElementById("searchInput").value.toLowerCase();
+
+      const jobs =
+        document.querySelectorAll(".job-card");
+
+      let found = 0;
+
+      jobs.forEach(function(job) {
+
+        const text = job.textContent.toLowerCase();
+
+        if (text.includes(search)) {
+          job.style.display = "block";
+          found++;
+        } else {
+          job.style.display = "none";
+        }
+
+      });
+
+      const noJobs =
+        document.getElementById("noJobs");
+
+      if (found === 0) {
+        noJobs.style.display = "block";
+      } else {
+        noJobs.style.display = "none";
+      }
+
+    }
+
+
+    function showApplicationForm(jobName) {
+
+      document.getElementById("selectedJob").textContent =
+        "Applying for: " + jobName;
+
+      document.getElementById("applicationModal").style.display =
+        "block";
+
+    }
+
+
+    function closeApplicationForm() {
+
+      document.getElementById("applicationModal").style.display =
+        "none";
+
+    }
+
+
+    window.onclick = function(event) {
+
+      const modal =
+        document.getElementById("applicationModal");
+
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+
+    };
+
+
+    function submitApplication(event) {
+
+      event.preventDefault();
+
+      const name =
+        document.getElementById("appName").value;
+
+      const phone =
+        document.getElementById("appPhone").value;
+
+      const email =
+        document.getElementById("appEmail").value;
+
+      const message =
+        document.getElementById("appMessage").value;
+
+      const job =
+        document.getElementById("selectedJob").textContent;
+
+
+      const whatsappNumber =
+        "YOUR_WHATSAPP_NUMBER";
+
+
+      if (whatsappNumber === "YOUR_WHATSAPP_NUMBER") {
+
+        alert(
+          "The application form is working, but the WhatsApp number still needs to be added."
+        );
+
+        return;
+
+      }
+
+
+      const text =
+        "NEW JOB APPLICATION%0A%0A" +
+        job +
+        "%0A%0A" +
+        "Name: " + encodeURIComponent(name) +
+        "%0APhone: " + encodeURIComponent(phone) +
+        "%0AEmail: " + encodeURIComponent(email) +
+        "%0AMessage: " + encodeURIComponent(message);
+
+
+      const url =
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        text;
+
+
+      window.open(url, "_blank");
+
+    }
+
+
+    function sendContactMessage() {
+
+      const name =
+        document.getElementById("contactName").value;
+
+      const phone =
+        document.getElementById("contactPhone").value;
+
+      const message =
+        document.getElementById("contactMessage").value;
+
+
+      if (!name || !phone || !message) {
+
+        alert("Please fill in all the fields.");
+
+        return;
+
+      }
+
+
+      const whatsappNumber =
+        "YOUR_WHATSAPP_NUMBER";
+
+
+      if (whatsappNumber === "YOUR_WHATSAPP_NUMBER") {
+
+        alert(
+          "The contact form is working, but the WhatsApp number still needs to be added."
+        );
+
+        return;
+
+      }
+
+
+      const text =
+        "NEW CONTACT MESSAGE%0A%0A" +
+        "Name: " + encodeURIComponent(name) +
+        "%0APhone: " + encodeURIComponent(phone) +
+        "%0AMessage: " + encodeURIComponent(message);
+
+
+      const url =
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        text;
+
+
+      window.open(url, "_blank");
+
+    }
+
+  </script>
+
+</body>
+</html>
