@@ -1722,13 +1722,428 @@ function openApplicationForm(jobTitle, country) {
 
         submitButton.textContent =
           "Submit Application";
+       <script>
 
-      }
+function toggleMenu() {
+  const nav = document.getElementById("mainNav");
 
-    };
+  if (nav) {
+    nav.classList.toggle("open");
+  }
+}
+
+
+function searchJobs() {
+
+  const searchInput = document.getElementById("jobSearch");
+  const countryFilter = document.getElementById("countryFilter");
+  const categoryFilter = document.getElementById("categoryFilter");
+
+  const keyword = searchInput.value.toLowerCase().trim();
+  const country = countryFilter.value.toLowerCase();
+  const category = categoryFilter.value.toLowerCase();
+
+  const jobs = document.querySelectorAll(".job-card");
+  const noResults = document.getElementById("noResults");
+  const jobCount = document.getElementById("jobCount");
+
+  let found = 0;
+
+  jobs.forEach(function(job) {
+
+    const title =
+      (job.dataset.title || "").toLowerCase();
+
+    const jobCountry =
+      (job.dataset.country || "").toLowerCase();
+
+    const jobCategory =
+      (job.dataset.category || "").toLowerCase();
+
+    const text =
+      job.textContent.toLowerCase();
+
+    const keywordMatch =
+      !keyword ||
+      title.includes(keyword) ||
+      text.includes(keyword);
+
+    const countryMatch =
+      !country ||
+      jobCountry === country;
+
+    const categoryMatch =
+      !category ||
+      jobCategory === category;
+
+    if (
+      keywordMatch &&
+      countryMatch &&
+      categoryMatch
+    ) {
+
+      job.style.display = "";
+      found++;
+
+    } else {
+
+      job.style.display = "none";
+
+    }
+
+  });
+
+  if (noResults) {
+    noResults.style.display =
+      found === 0 ? "block" : "none";
+  }
+
+  if (jobCount) {
+
+    if (found === 0) {
+
+      jobCount.textContent =
+        "No matching jobs found";
+
+    } else {
+
+      jobCount.textContent =
+        "Showing " +
+        found +
+        " job" +
+        (found === 1 ? "" : "s");
+
+    }
+
+  }
 
 }
-  </script>
+
+
+/* =========================
+   APPLICATION FORM
+========================= */
+
+function openApplicationForm(jobTitle, country) {
+
+  const overlay = document.createElement("div");
+
+  overlay.style.position = "fixed";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.background = "rgba(0,0,0,0.65)";
+  overlay.style.display = "flex";
+  overlay.style.alignItems = "center";
+  overlay.style.justifyContent = "center";
+  overlay.style.padding = "20px";
+  overlay.style.zIndex = "99999";
+  overlay.style.overflowY = "auto";
+
+
+  const box = document.createElement("div");
+
+  box.style.background = "white";
+  box.style.width = "100%";
+  box.style.maxWidth = "600px";
+  box.style.maxHeight = "95vh";
+  box.style.overflowY = "auto";
+  box.style.borderRadius = "15px";
+  box.style.padding = "25px";
+  box.style.position = "relative";
+
+
+  const closeButton = document.createElement("button");
+
+  closeButton.type = "button";
+  closeButton.textContent = "×";
+
+  closeButton.style.position = "absolute";
+  closeButton.style.right = "15px";
+  closeButton.style.top = "8px";
+  closeButton.style.border = "0";
+  closeButton.style.background = "transparent";
+  closeButton.style.fontSize = "32px";
+  closeButton.style.cursor = "pointer";
+
+  closeButton.onclick = function() {
+    overlay.remove();
+  };
+
+
+  const title = document.createElement("h2");
+
+  title.textContent =
+    "Apply for " + jobTitle;
+
+  title.style.color = "#0b3d91";
+  title.style.marginBottom = "8px";
+
+
+  const location = document.createElement("p");
+
+  location.textContent =
+    "Job location: " + country;
+
+  location.style.color = "#66758b";
+  location.style.marginBottom = "20px";
+
+
+  const form = document.createElement("form");
+
+  form.action =
+    "https://formspree.io/f/mzezyaln";
+
+  form.method = "POST";
+
+
+  function addField(labelText, fieldName, fieldType) {
+
+    const wrapper =
+      document.createElement("div");
+
+    wrapper.style.marginBottom = "15px";
+
+
+    const label =
+      document.createElement("label");
+
+    label.textContent = labelText;
+
+    label.style.display = "block";
+    label.style.fontWeight = "700";
+    label.style.marginBottom = "6px";
+
+
+    const input =
+      document.createElement("input");
+
+    input.type = fieldType;
+    input.name = fieldName;
+    input.required = true;
+
+    input.style.width = "100%";
+    input.style.padding = "12px";
+    input.style.border = "1px solid #ccd5e2";
+    input.style.borderRadius = "7px";
+    input.style.boxSizing = "border-box";
+
+
+    wrapper.appendChild(label);
+    wrapper.appendChild(input);
+
+    form.appendChild(wrapper);
+  }
+
+
+  addField(
+    "Full Name",
+    "full_name",
+    "text"
+  );
+
+
+  addField(
+    "Email Address",
+    "email",
+    "email"
+  );
+
+
+  addField(
+    "Phone Number",
+    "phone",
+    "tel"
+  );
+
+
+  addField(
+    "Country of Residence",
+    "country_of_residence",
+    "text"
+  );
+
+
+  addField(
+    "Highest Level of Education",
+    "education",
+    "text"
+  );
+
+
+  addField(
+    "Years of Work Experience",
+    "work_experience",
+    "text"
+  );
+
+
+  const messageLabel =
+    document.createElement("label");
+
+  messageLabel.textContent =
+    "Tell us about yourself";
+
+  messageLabel.style.display = "block";
+  messageLabel.style.fontWeight = "700";
+  messageLabel.style.marginBottom = "6px";
+
+
+  const message =
+    document.createElement("textarea");
+
+  message.name = "message";
+  message.required = true;
+  message.rows = 5;
+
+  message.style.width = "100%";
+  message.style.padding = "12px";
+  message.style.border = "1px solid #ccd5e2";
+  message.style.borderRadius = "7px";
+  message.style.boxSizing = "border-box";
+  message.style.marginBottom = "15px";
+
+
+  form.appendChild(messageLabel);
+  form.appendChild(message);
+
+
+  const jobField =
+    document.createElement("input");
+
+  jobField.type = "hidden";
+  jobField.name = "job_position";
+  jobField.value = jobTitle;
+
+  form.appendChild(jobField);
+
+
+  const countryField =
+    document.createElement("input");
+
+  countryField.type = "hidden";
+  countryField.name = "job_country";
+  countryField.value = country;
+
+  form.appendChild(countryField);
+
+
+  const subjectField =
+    document.createElement("input");
+
+  subjectField.type = "hidden";
+  subjectField.name = "_subject";
+  subjectField.value =
+    "New Job Application - " + jobTitle;
+
+  form.appendChild(subjectField);
+
+
+  const submitButton =
+    document.createElement("button");
+
+  submitButton.type = "submit";
+
+  submitButton.textContent =
+    "Submit Application";
+
+  submitButton.style.width = "100%";
+  submitButton.style.padding = "14px";
+  submitButton.style.border = "0";
+  submitButton.style.borderRadius = "8px";
+  submitButton.style.background = "#0b3d91";
+  submitButton.style.color = "white";
+  submitButton.style.fontWeight = "700";
+  submitButton.style.fontSize = "16px";
+  submitButton.style.cursor = "pointer";
+
+
+  form.appendChild(submitButton);
+
+
+  const note =
+    document.createElement("p");
+
+  note.textContent =
+    "Your application will be reviewed after submission.";
+
+  note.style.textAlign = "center";
+  note.style.color = "#68758a";
+  note.style.fontSize = "13px";
+  note.style.marginTop = "12px";
+
+  form.appendChild(note);
+
+
+  box.appendChild(closeButton);
+  box.appendChild(title);
+  box.appendChild(location);
+  box.appendChild(form);
+
+  overlay.appendChild(box);
+
+  document.body.appendChild(overlay);
+
+
+  overlay.addEventListener(
+    "click",
+    function(event) {
+
+      if (event.target === overlay) {
+        overlay.remove();
+      }
+
+    }
+  );
+
+}
+
+
+/* SEARCH WITH ENTER KEY */
+
+const jobSearch =
+  document.getElementById("jobSearch");
+
+if (jobSearch) {
+
+  jobSearch.addEventListener(
+    "keydown",
+    function(event) {
+
+      if (event.key === "Enter") {
+        searchJobs();
+      }
+
+    }
+  );
+
+}
+
+
+/* CLOSE MOBILE MENU */
+
+document
+  .querySelectorAll("#mainNav a")
+  .forEach(function(link) {
+
+    link.addEventListener(
+      "click",
+      function() {
+
+        const nav =
+          document.getElementById("mainNav");
+
+        if (nav) {
+          nav.classList.remove("open");
+        }
+
+      }
+    );
+
+  });
+
+</script> 
 
 </body>
 </html>
